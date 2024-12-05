@@ -9,9 +9,7 @@ import { User } from "./src/models/user.model.js";
 import cors from "cors"
 
 dotenv.config()
-app.use(cors({
-    origin:'https://sakhaadigital.onrender.com'
-}))  
+
 
 // Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -21,6 +19,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Set ejs-mate as the rendering engine for EJS files
+app.use(cors({
+    origin:'https://sakhaadigital.onrender.com'
+}))  
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
@@ -31,7 +32,8 @@ app.use(express.urlencoded({extended:true}))
 
 
 DBCONNECT()
-.then(console.log(`mongo db is connected sucessfuly on http://localhost:${process.env.PORT}`))
+.then(()=>{    console.log(`mongo db is connected sucessfuly on http://localhost:${process.env.PORT}`)
+})
 .catch((err)=>{
     console.log(err)
 })
@@ -51,9 +53,9 @@ app.get("/sakhaadigital/:name/:email/:message",asynchandler(async(req,res)=>{
     message:message
    })
 if(post){
-    return res.status("200").json({name,email,message})
+    return res.status(200).json({name,email,message})
 }else{
-    return res.status("400").json({name:null,email:null,message:null})
+    return res.status(400).json({name:null,email:null,message:null})
 
 }
 }))
