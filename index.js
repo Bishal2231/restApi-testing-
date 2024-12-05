@@ -6,8 +6,13 @@ import { DBCONNECT } from "./src/db/db.js";
 import dotenv from "dotenv"
 import { asynchandler } from "./src/utils/asynchandler.js";
 import { User } from "./src/models/user.model.js";
+import cors from "cors"
 
 dotenv.config()
+app.use(cors({
+    origin:'https://sakhaadigital.onrender.com'
+}))  
+
 // Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
