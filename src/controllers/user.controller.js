@@ -40,6 +40,7 @@ export const rohitHandleData=asynchandler(async(req,res)=>{
         message:message
        })
     if(post){
+        console.log(post)
         return res.status(200).json({name,email,message})
     }else{
         return res.status(400).json({name:null,email:null,message:null})
