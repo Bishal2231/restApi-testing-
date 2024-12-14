@@ -17,11 +17,6 @@ const rohitSchema=new Schema({
         required:true
 
 
-    },
-    phone:{
-        type:String,
-        required:true
-
     }
 
 
