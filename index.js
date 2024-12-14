@@ -21,9 +21,19 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Set ejs-mate as the rendering engine for EJS files
+const allowedOrigins = [
+    'https://sakhaadigital.onrender.com',
+    'https://rohitsah.onrender.com',
+];
 app.use(cors({
-    origin:'https://sakhaadigital.onrender.com'
-}))  
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true); // Allow the request
+        } else {
+            callback(new Error('Not allowed by CORS')); // Reject the request
+        }
+    },
+}));
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
