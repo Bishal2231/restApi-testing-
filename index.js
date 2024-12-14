@@ -8,7 +8,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import { digitalSakhaaHandleData } from "./src/controllers/user.controller.js";
 import { digitalSakhaaQuestions } from "./src/controllers/user.controller.js";
-import { rohitQuestions } from "./src/controllers/user.controller.js";
+import { rohitQuestions,rohitHandleData } from "./src/controllers/user.controller.js";
 
 dotenv.config()
 
