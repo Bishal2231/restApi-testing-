@@ -4,9 +4,11 @@ import { fileURLToPath } from 'url';
 import ejsMate from 'ejs-mate';
 import { DBCONNECT } from "./src/db/db.js";
 import dotenv from "dotenv"
-import { asynchandler } from "./src/utils/asynchandler.js";
-import { User } from "./src/models/user.model.js";
+
 import cors from "cors"
+import { digitalSakhaaHandleData } from "./src/controllers/user.controller.js";
+import { digitalSakhaaQuestions } from "./src/controllers/user.controller.js";
+import { rohitQuestions } from "./src/controllers/user.controller.js";
 
 dotenv.config()
 
@@ -43,28 +45,21 @@ app.get('/',(req,res)=>{
     res.send("hello world")
 })
 
-app.get("/sakhaadigital/:name/:email/:message",asynchandler(async(req,res)=>{
-    const name=req.params.name;
-    const email=req.params.email;
-    const message  =req.params.message
-   const post=await User.create({ 
-    name:name,
-    email:email,
-    message:message
-   })
-if(post){
-    return res.status(200).json({name,email,message})
-}else{
-    return res.status(400).json({name:null,email:null,message:null})
+app.get("/sakhaadigital/:name/:email/:message",digitalSakhaaHandleData)
 
-}
-}))
+app.get('/contacts',digitalSakhaaQuestions)
 
-app.get('/contacts',asynchandler(async(req,res)=>{
 
-const allpost=await User.find().sort({createdAt:-1});
-return res.render("questions.ejs",{allpost})
-}))
+
+
+app.get("/rohit/:name/:email/:message",rohitHandleData)
+
+app.get('/rohit-questions',rohitQuestions)
+
+
+
+
+
 app.listen(PORT,()=>{
     console.log("server is running")
 })
