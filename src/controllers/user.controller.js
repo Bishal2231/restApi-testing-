@@ -1,6 +1,7 @@
-import { asynchandler } from "./src/utils/asynchandler.js";
-import { User } from "./src/models/user.model.js";
+
+import { User } from "..//models/user.model.js";
 import { Rohit } from "../models/rohit.model.js";
+import { asynchandler } from "../utils/asynchandler.js";
 
 
 
